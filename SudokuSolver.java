@@ -43,4 +43,12 @@ public class SudokuSolver {
             System.out.println();
         }
     }
+
+    private static boolean inRow(int[][] board, int num, int row) {
+        for (int i = 0; i < boardSize; i++) {
+            if (board[row][i] == num)
+                return true;
+        }
+        return false;
+    }
 }
