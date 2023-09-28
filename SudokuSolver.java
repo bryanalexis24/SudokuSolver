@@ -51,4 +51,12 @@ public class SudokuSolver {
         }
         return false;
     }
+
+    private static boolean inCol(int[][] board, int num, int col) {
+        for (int i = 0; i < boardSize; i++) {
+            if (board[i][col] == num)
+                return true;
+        }
+        return false;
+    }
 }
