@@ -16,6 +16,21 @@
 public class SudokuSolver {
     private static final int boardSize = 9;
     public static void main(String[] args) {
+        // TESTS
+        // Unsolvable Sudoku Board
+        // int[][] board = {
+        // {5, 1, 6, 8, 4, 9, 7, 3, 2},
+        // {3, 0, 7, 6, 0, 5, 0, 0, 0},
+        // {8, 0, 9, 7, 0, 0, 0, 6, 5},
+        // {1, 3, 5, 0, 6, 0, 9, 0, 7},
+        // {4, 7, 2, 5, 9, 1, 0, 0, 6},
+        // {9, 6, 8, 3, 7, 0, 0, 5, 0},
+        // {2, 5, 3, 1, 8, 6, 0, 7, 4},
+        // {6, 8, 4, 2, 0, 7, 5, 0, 0},
+        // {7, 9, 1, 0, 5, 0, 6, 0, 8}
+        // };
+        
+        // Solvable Sudoku Board
         int[][] board = {
         {7, 0, 2, 0, 5, 0, 6, 0, 0},
         {0, 0, 0, 0, 0, 3, 0, 0, 0},
@@ -28,6 +43,13 @@ public class SudokuSolver {
         {0, 0, 7, 0, 4, 0, 2, 0, 3}
         };
 
+        System.out.println("Solve the Sudoku:");
+        printBoard(board);
+        System.out.println();
+        if (solveBoard(board))
+            System.out.println("Sudoku solved!");
+        else
+            System.out.println("Unsolvable Sudoku...");
         printBoard(board);
     }
 
@@ -75,5 +97,26 @@ public class SudokuSolver {
     private static boolean isValidNum(int[][] board, int num, int row, int col) {
         return !inRow(board, num, row) && !inCol(board, num, col)
             && !inBox(board, num, row, col);
+    }
+
+    private static boolean solveBoard(int[][] board) {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                if (board[i][j] == 0) {
+                    for (int attemptNum = 1; attemptNum <= 9; attemptNum++) {
+                        if (isValidNum(board, attemptNum, i, j)) {
+                            board[i][j] = attemptNum;
+
+                            if (solveBoard(board))
+                                return true;
+                            else
+                                board[i][j] = 0;
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
