@@ -71,4 +71,9 @@ public class SudokuSolver {
         }
         return false;
     }
+
+    private static boolean isValidNum(int[][] board, int num, int row, int col) {
+        return !inRow(board, num, row) && !inCol(board, num, col)
+            && !inBox(board, num, row, col);
+    }
 }
