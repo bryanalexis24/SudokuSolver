@@ -59,4 +59,16 @@ public class SudokuSolver {
         }
         return false;
     }
+
+    private static boolean inBox(int[][] board, int num, int row, int col) {
+        int boxStartRow = row - row % 3;
+        int boxStartCol = col - col % 3;
+        for (row = boxStartRow; row < boxStartRow + 3; row++) {
+            for (col = boxStartCol; col < boxStartCol + 3; col++) {
+                if (board[row][col] == num)
+                    return true;
+            } 
+        }
+        return false;
+    }
 }
